@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<data>
+  <objects>
+    <a1 id="1" bonus="3" need="!mage" slot="chest" size="big" value="600" name="Armure de Mithril" hand="0"/>
+    <a2 id="2" bonus="1" need="" slot="chest" size="little" value="200" name="Armure de Cuir" hand="0"/>
+    <a3 id="3" bonus="1" need="" slot="chest" size="little" value="600" name="Casque de Virilité Ostentatoire" hand="0">
+      <code>
+	if class == elf: {
+	var bonus.bonus += 2
+	}
+      </code>
+    </a3>
+    <a4 id="4" bonus="4" need=";human" slot="chest" size="big" value="600" name="Hallebarde Suisse Multifonction" hand="2"/>
+    <a5 id="5" bonus="3" need=";humand" slot="helmet" size="little" value="400" name="Bandana de Gros Dur" hand="0"/>
+    <a6 id="6" bonus="1" need="" slot="" size="little" value="200" name="Genouillères Perforantes" hand="0"/>
+    <a7 id="7" bonus="3" need=";elf" slot="" size="little" value="600" name="Rapière d'Injustice Flagrante" hand="1"/>
+    <a8 id="8" bonus="4" need=";dwarf" slot="" size="little" value="600" name="Marteau des Rotules Douloureuses" hand="1"/>
+    <a9 id="9" bonus="3" need="!warrior" slot="" size="little" value="600" name="Collants de Forse de Géant" hand="0"/>
+    <a10 id="10" bonus="0" need="" slot="boots" size="little" value="700" name="Sandales de Protection" hand="0">
+      <code>
+	when event.get-in: card-type=malediction {
+	var event.card.effect = ""
+	}
+      </code>
+    </a10>
+    <a11 id="11" bonus="3" need=";half" slot="" size="big" value="400" name="Escabeau" hand="0"/>
+    <a12 id="12" bonus="3" need="mage" slot="helmet" size="little" value="400" name="Chapeau Pointu de Thaumaturgie" hand="0"/>
+    <a13 id="13" bonus="1" need="" slot="" size="little" value="200" name="Lance de 3,50 M" hand="2"/>
+    <a14 id="14" bonus="3" need="" slot="" size="big" value="600" name="Tronçonneuse de la Mort" hand="2"/>
+    <a15 id="15" bonus="5" need="mage" slot="" size="little" value="800" name="Bâton de Napalm" hand="1"/>
+    <a16 id="16" bonus="3" need=";half" slot="" size="little" value="400" name="Sandwich Chocolat-Moules-Anchois" hand="0"/>
+    <a17 id="17" bonus="4" need="priest" slot="" size="little" value="600" name="Masse d'Armes de Répartie Piquante" hand="1"/>
+    <a18 id="18" bonus="3" need="priest" slot="" size="little" value="600" name="Râpe à Fromage de la Paix" hand="1"/>
+    <a19 id="19" bonus="1" need="priest" slot="" size="little" value="0" name="Brochette de Rat" hand="1"/>
+    <a20 id="20" bonus="3" need=";;female" slot="" size="little" value="400" name="Épée de Féminisme Exacerbé" hand="1"/>
+    <a21 id="21" bonus="2" need="" slot="chest" size="little" value="400" name="Armure de Flammes" hand="0"/>
+    <a22 id="22" bonus="1" need="" slot="chest" size="little" value="400" name="Armure Gluante" hand="0"/>
+    <a23 id="23" bonus="3" need="" slot="" size="little" value="400" name="Gourdin de Misogynie Fracassante" hand="1"/>
+    <a24 id="24" bonus="4" need=";stealer" slot="" size="little" value="600" name="Cape d'Ombre" hand="0"/>
+    <a25 id="25" bonus="2" need="" slot="" size="little" value="400" name="Épée (de) Batard(e)" hand="1"/>
+    <a26 id="26" bonus="4" need=";elf" slot="" size="little" value="800" name="Arc Enrubanné" hand="2"/>
+    <a27 id="27" bonus="0" need="" slot="" size="big" value="300" name="Tuba d'Envoûtement" hand="1">
+      <code>
+	when event.fly.fly: {
+	var bonus.bonus-fly += 3
+	}
+	when event.fly.fly-out: {
+	draw-card(type=treasure,quantity=3)
+	}
+      </code>
+    </a27>
+    <a28 id="28" bonus="1" need="" slot="helmet" size="little" value="200" name="Casque de Courage" hand="0"/>
+    <a29 id="29" bonus="2" need="" slot="helmet" size="little" value="400" name="Bottes de Convocation d'Hémorroïdes" hand="0"/>
+    <a30 id="30" bonus="4" need="warrior" slot="" size="big" value="600" name="Bouclier Surdimensionné" hand="1"/>
+    <a31 id="31" bonus="3" need=";dwarf" slot="chest" size="little" value="400" name="Armure Trapue" hand="0"/>
+    <a32 id="32" bonus="4" need="stealer" slot="" size="little" value="400" name="Dague de Traitrise" hand="1"/>
+    <a33 id="33" bonus="3" need="" slot="" size="big" value="0" name="Énorme Rocher" hand="2"/>
+    <a34 id="34" bonus="0" need="!priest" size="little" name="Genouillères de Séduction" hand="0"/>
+  </objects>
+
+  <races>
+    <half id="half" big-object-max="1" card-max="5">
+      <code>
+	when event.sell: optional {
+	var sell-value *= 2
+	}
+	when event.fly.fly-out-fail: optional {
+	drop-card(quantity=1)
+	try-again(self)
+	}
+      </code>
+    </half>
+    <elf id="elf" big-object-max="1" card-max="5">
+      <code>
+	when event.fly.fly: {
+	var bonus.bonus-fly += 1
+	}
+      </code>
+    </elf>
+    <dwarf id="dwarf" big-object-max="-1" card-max="6"/>
+  </races>
+  
+  <kits>
+    <warrior id="warrior">
+      <code>
+	when event.fight.end: {
+	if event.fight.score == ex aequo: {
+	var bonus.bonus += 1
+	}
+	}
+      </code>
+      <capacity1 name="Rage de berserker" max-use="3" use="fight">
+	<code>
+	  drop-card(quantity=1)
+	  var bonus.bonus += 1
+	</code>
+      </capacity1>
+    </warrior>
+    <stealer id="stealer">
+      <capacity1 name="Poignarder" max-use="1" use="fight">
+	<code>
+	  drop-card(quantity=1)
+	  var other.bonus.bonus += 1
+	</code>
+      </capacity1>
+      <capacity2 name="Vol à la tire" max-use="-1" use="always">
+	<code>
+	  drop-card(quantity=1)
+	  if random.de >= 5: {
+	  take-object(type=little)
+	  } else {
+	  var player.level -= 1
+	  }
+	</code>
+      </capacity2>
+    </stealer>
+    <mage id="mage">
+      <capacity1 name="Sort de vol" max-use="3" use="fly-out-fail">
+	<code>
+	  drop-card(quantity=1)
+	  var bonus.bonus-fly += 1
+	</code>
+      </capacity1>
+      <capacity2 name="Sort de charme" max-use="1" use="fight">
+	<code>
+	  if hand.cards.quantity >= 3: {
+	  drop-card(quantity=all)
+	  kill.kill-without-fight(fight.monster)
+	</code>
+      </capacity2>
+    </mage>
+    <priest id="priest">
+      <capacity1 name="Renvoi" max-use="3" use="fight">
+	<code>
+	  if fight.monster.monster-type == undead: {
+	  drop-card(quantity=1)
+	  var bonus.bonus += 3
+	</code>
+      </capacity1>
+    </priest>
+  </kits>
+</data>
